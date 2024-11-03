@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>91 Club Enhanced UI</title>
+    <title>91 Club Hack</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         /* Basic Reset */
@@ -20,9 +20,9 @@
             color: #333;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Align items to the top */
-            min-height: 100vh; /* Ensure full viewport height */
-            padding: 20px; /* Add padding around the container */
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
         }
 
         /* Container Styling */
@@ -36,8 +36,8 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            max-height: 90vh; /* Prevent the container from exceeding 90% of the viewport height */
-            overflow-y: auto; /* Allow vertical scrolling */
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         /* Header with online users */
@@ -46,9 +46,9 @@
             color: #666;
             font-weight: 600;
             display: flex;
-            justify-content: space-between; /* Space between date and online users */
-            align-items: center; /* Align items vertically */
-            margin-bottom: 10px; /* Reduced space between header and user info */
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
         }
 
         .online-users {
@@ -60,13 +60,13 @@
         .user-info {
             font-size: 14px;
             color: #555;
-            margin-top: 5px; /* Reduced space above user info */
+            margin-top: 5px;
         }
 
         /* Logo and Title */
         .logo {
-            max-width: 120px; /* Adjust width as needed */
-            margin: 0 auto; /* Center the logo */
+            max-width: 120px;
+            margin: 0 auto;
         }
         .title {
             font-size: 18px;
@@ -88,17 +88,16 @@
             font-size: 15px;
         }
 
-        /* Align the period label and input in a straight line */
         .input-group {
             display: flex;
-            align-items: center; /* Center vertically */
-            gap: 10px; /* Space between label and input */
+            align-items: center;
+            gap: 10px;
         }
 
         .input-group span {
-            font-size: 15px; /* Ensure label text size matches input */
-            color: #444; /* Match label color with other text */
-            width: 80px; /* Fixed width for the label */
+            font-size: 15px;
+            color: #444;
+            width: 80px;
         }
 
         .box input {
@@ -179,12 +178,44 @@
         .register-btn:hover {
             background-color: #e64a19;
         }
+
+        /* Dialog Box Styles */
+        .dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .dialog-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 320px;
+            width: 90%;
+            position: relative;
+            text-align: center;
+        }
+        .dialog-box .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <span style="font-size: 12px; color: #666;"></span> <!-- Current Date -->
+        <span style="font-size: 12px; color: #666;"></span>
         <span class="online-users">● Online Users: <span id="online-users"></span></span>
     </div>
     
@@ -199,7 +230,7 @@
         <div>Server: <span style="color:#34a853;">Active</span></div>
         <div class="input-group">
             <span>Period:</span>
-            <input type="text" id="period-input" placeholder="Enter..." />
+            <input type="text" id="period-input" placeholder="Enter..." oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
         </div>
         <div>Result: <span id="result">--</span></div>
     </div>
@@ -214,9 +245,17 @@
         'Register' बटन पर क्लिक करके एक नया account बनाएं। यदि आप इस मॉड का उपयोग पुराने account में करते हैं, तो यह काम नहीं करेगा।
     </div>
     <button class="button register-btn" onclick="window.open('https://colorsignup.github.io/ES1/91club', '_blank')">Register</button>
-<button class="button" onclick="window.open('https://telegram.dog/EarningScripter1', '_blank')">Join Telegram</button>
-<button class="button" onclick="window.open('https://telegram.dog/EarningScripter1_bot', '_blank')">Customer Care</button>
+    <button class="button" onclick="window.open('https://telegram.dog/EarningScripter1', '_blank')">Join Telegram</button>
+    <button class="button" onclick="window.open('https://telegram.dog/EarningScripter1_bot', '_blank')">Customer Care</button>
+</div>
 
+<!-- Dialog Box HTML -->
+<div id="dialog-overlay" class="dialog-overlay" style="display: none;" onclick="closeDialog()">
+    <div class="dialog-box" onclick="event.stopPropagation()">
+        <button class="close-btn" onclick="closeDialog()">×</button>
+        <p>Please create a new account by clicking on the register button. Using this mod with an old account may result in loss.</p>
+        <button class="button register-btn" onclick="window.open('https://colorsignup.github.io/ES1/91club', '_blank'); closeDialog();">Register</button>
+    </div>
 </div>
 
 <script>
@@ -229,7 +268,7 @@
     }
 
     // Function to update online users and winning details
-    function updateRandomData() {
+        function updateRandomData() {
         document.getElementById("online-users").textContent = getRandomNumber(5000, 15000);
         
         const userPart1 = getRandomNumber(634, 958);
@@ -247,7 +286,6 @@
         const resultDisplay = document.getElementById("result");
         const loadingDisplay = document.getElementById("loading");
 
-        // Show loading animation
         if (periodInput === "") {
             alert("Please enter the Period No.");
             return;
@@ -259,36 +297,38 @@
         setTimeout(() => {
             loadingDisplay.style.display = 'none';
 
-            // Check if the result for this period is already calculated
             if (resultsStore[periodInput]) {
-                // Display the existing result
                 resultDisplay.textContent = resultsStore[periodInput];
             } else {
-                // Determine the last digit of the period number
                 const lastDigit = parseInt(periodInput.slice(-1));
-
-                                // Randomly decide whether to show based on last digit or a random result
-                const showRandomly = Math.random() < 0.5; // 50% chance to show a random result
+                const showRandomly = Math.random() < 0.5;
 
                 let result;
                 if (showRandomly) {
-                    // Show random result
                     const predefinedResults = ["BIG", "SMALL"];
                     const randomIndex = Math.floor(Math.random() * predefinedResults.length);
                     result = predefinedResults[randomIndex];
                 } else {
-                    // Show result based on last digit
-                    result = (lastDigit % 2 === 0) ? "SMALL" : "BIG"; // Even last digit => TIGER, Odd => DRAGON
+                    result = (lastDigit % 2 === 0) ? "SMALL" : "BIG";
                 }
 
-                // Store the result for this period
                 resultsStore[periodInput] = result;
-
-                // Display the new result
                 resultDisplay.textContent = result;
             }
         }, 1000);
     }
+
+    // Show dialog on page load
+    window.onload = function() {
+        document.getElementById("dialog-overlay").style.display = 'flex';
+    };
+
+    // Close dialog function
+    function closeDialog() {
+        document.getElementById("dialog-overlay").style.display = 'none';
+    }
 </script>
 </body>
 </html>
+
+    
