@@ -273,12 +273,12 @@
                 let result;
                 if (showRandomly) {
                     // Show random result
-                    const predefinedResults = ["DRAGON", "TIGER"];
+                    const predefinedResults = ["BIG", "SMALL"];
                     const randomIndex = Math.floor(Math.random() * predefinedResults.length);
                     result = predefinedResults[randomIndex];
                 } else {
                     // Show result based on last digit
-                    result = (lastDigit % 2 === 0) ? "TIGER" : "DRAGON"; // Even last digit => TIGER, Odd => DRAGON
+                    result = (lastDigit % 2 === 0) ? "SMALL" : "BIG"; // Even last digit => TIGER, Odd => DRAGON
                 }
 
                 // Store the result for this period
