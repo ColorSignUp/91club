@@ -3,12 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <script type="text/javascript">
-        window.location.href = "https://91club.club/#/register?invitationCode=55817282407";
-    </script>
+    <title>91 Club Enhanced UI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            background: linear-gradient(to bottom right, #e6f9f2, #c1e9db);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align items to the top */
+            min-height: 100vh; /* Ensure full viewport height */
+            padding: 20px; /* Add padding around the container */
+        }
+
+        /* Container Styling */
+        .container {
+            width: 360px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-height: 90vh; /* Prevent the container from exceeding 90% of the viewport height */
+            overflow-y: auto; /* Allow vertical scrolling */
+        }
+
+        /* Header with online users */
+        .header {
+            font-size: 15px;
+            color: #666;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between; /* Space between date and online users */
+            align-items: center; /* Align items vertically */
+            margin-bottom: 10px; /* Reduced space between header and user info */
+        }
+
+        .online-users {
+            color: #34a853;
+            font-weight: bold;
+        }
+
+        /* User Info */
+        .user-info {
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px; /* Reduced space above user info */
+        }
+
+        /* Logo and Title */
+        .logo {
+            max-width: 120px; /* Adjust width as needed */
+            margin: 0 auto; /* Center the logo */
+        }
+        .title {
+            font-size: 18px;
+            color: #444;
+            margin: 0;
+        }
+
+        /* Info Box Styling */
+        .box {
+            background-color: #f9fafa;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .box div {
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        /* Align the period label and input in a straight line */
+        .input-group {
+            display: flex;
+            align-items: center; /* Center vertically */
+            gap: 10px; /* Space between label and input */
+        }
+
+        .input-group span {
+            font-size: 15px; /* Ensure label text size matches input */
+            color: #444; /* Match label color with other text */
+            width: 80px; /* Fixed width for the label */
+        }
+
+        .box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+            margin-top: 5px;
+        }
+
+        /* Start Button Styling */
+        .start-btn {
+            background-color: #009688;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .start-btn:hover {
+            background-color: #00796b;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            color: #009688;
+            font-weight: bold;
+            animation: pulse 1s infinite;
+            margin-top: 10px;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Instruction Boxes */
+        .instruction-box {
+            font-size: 15px;
+            color: #444;
+            background-color: #e6f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        /* Footer Buttons */
+        .button {
+            background-color: #e0f7fa;
+            color: #009688;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            font-weight: bold;
+        }
+        .button:hover {
+            background-color: #b2dfdb;
+        }
+
+        /* Unique Button for Register */
+        .register-btn {
+            background-color: #ff7043;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .register-btn:hover {
+            background-color: #e64a19;
+        }
+    </style>
 </head>
 <body>
-    <p>Redirecting... If you are not redirected automatically, click <a href="https://91club.club/#/register?invitationCode=55817282407">here</a>.</p>
+<div class="container">
+    <div class="header">
+        <span style="font-size: 12px; color: #666;"></span> <!-- Current Date -->
+        <span class="online-users">● Online Users: <span id="online-users"></span></span>
+    </div>
+    
+    <div class="user-info" id="user-info"></div>
+
+    <div class="logo">
+        <img src="91club.png" alt="91 Club Logo" style="width: 100%; height: auto; max-width: 120px;" />
+    </div>
+    <div class="title">91 Club</div>
+    
+    <div class="box">
+        <div>Server: <span style="color:#34a853;">Active</span></div>
+        <div class="input-group">
+            <span>Period:</span>
+            <input type="text" id="period-input" placeholder="Enter..." />
+        </div>
+        <div>Result: <span id="result">--</span></div>
+    </div>
+    
+    <button class="start-btn" onclick="startProcess()">Start</button>
+    <div id="loading" class="loading">Loading...</div>
+    
+    <div class="instruction-box">
+        Create a new 91club account by clicking on 'Register' button. If you use this mod in an old account, it may not work.
+    </div>
+    <div class="instruction-box">
+        'Register' बटन पर क्लिक करके एक नया account बनाएं। यदि आप इस मॉड का उपयोग पुराने account में करते हैं, तो यह काम नहीं करेगा।
+    </div>
+    <button class="button register-btn" onclick="window.open('https://colorsignup.github.io/ES1/91club', '_blank')">Register</button>
+<button class="button" onclick="window.open('https://telegram.dog/EarningScripter1', '_blank')">Join Telegram</button>
+<button class="button" onclick="window.open('https://telegram.dog/EarningScripter1_bot', '_blank')">Customer Care</button>
+
+</div>
+
+<script>
+    // Store results for each period number
+    const resultsStore = {};
+
+    // Function to generate random numbers
+    function getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Function to update online users and winning details
+    function updateRandomData() {
+        document.getElementById("online-users").textContent = getRandomNumber(5000, 15000);
+        
+        const userPart1 = getRandomNumber(634, 958);
+        const userPart2 = getRandomNumber(567, 896);
+        const winAmount = getRandomNumber(5000, 50000);
+        document.getElementById("user-info").textContent = `User ${userPart1}****${userPart2} Win ₹${winAmount}`;
+    }
+
+    // Update random data every second
+    setInterval(updateRandomData, 1000);
+
+    // Function to handle the start process and show result
+    function startProcess() {
+        const periodInput = document.getElementById("period-input").value;
+        const resultDisplay = document.getElementById("result");
+        const loadingDisplay = document.getElementById("loading");
+
+        // Show loading animation
+        if (periodInput === "") {
+            alert("Please enter the Period No.");
+            return;
+        }
+
+        loadingDisplay.style.display = 'block';
+
+        // Simulate loading time
+        setTimeout(() => {
+            loadingDisplay.style.display = 'none';
+
+            // Check if the result for this period is already calculated
+            if (resultsStore[periodInput]) {
+                // Display the existing result
+                resultDisplay.textContent = resultsStore[periodInput];
+            } else {
+                // Determine the last digit of the period number
+                const lastDigit = parseInt(periodInput.slice(-1));
+
+                                // Randomly decide whether to show based on last digit or a random result
+                const showRandomly = Math.random() < 0.5; // 50% chance to show a random result
+
+                let result;
+                if (showRandomly) {
+                    // Show random result
+                    const predefinedResults = ["DRAGON", "TIGER"];
+                    const randomIndex = Math.floor(Math.random() * predefinedResults.length);
+                    result = predefinedResults[randomIndex];
+                } else {
+                    // Show result based on last digit
+                    result = (lastDigit % 2 === 0) ? "TIGER" : "DRAGON"; // Even last digit => TIGER, Odd => DRAGON
+                }
+
+                // Store the result for this period
+                resultsStore[periodInput] = result;
+
+                // Display the new result
+                resultDisplay.textContent = result;
+            }
+        }, 1000);
+    }
+</script>
 </body>
 </html>
